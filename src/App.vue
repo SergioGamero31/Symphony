@@ -1,13 +1,17 @@
 <template>
-  <header>
-    <NavBar/>
-  </header>
-  <main>
-    <RouterView/>
-  </main>
-  <section>
-    <PlayBar/>
-  </section>
+  <div class="h-screen w-screen flex">
+    <header class="bg-raisin-black">
+      <NavBar/>
+    </header>
+    <div class="flex flex-col w-full justify-between">
+      <main class="h-full bg-jet">
+        <RouterView/>
+      </main>
+      <section class="bg-raisin-black">
+        <PlayBar/>
+      </section>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -16,5 +20,9 @@
   import PlayBar from './components/PlayBar.vue';
 </script>
 
-<style scoped>
+<style>
+
+.router-link-exact-active{
+  color: #fff;
+}
 </style>
