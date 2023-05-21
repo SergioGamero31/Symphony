@@ -4,7 +4,7 @@
       <NavBar/>
     </header>
     <div class="flex flex-col w-full justify-between">
-      <main class="h-full bg-jet">
+      <main class=" flex flex-col bg-jet px-14 h-full overflow-hidden">
         <RouterView/>
       </main>
       <section class="bg-raisin-black">
