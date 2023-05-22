@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import config from "../../config";
 
 export const useHomeStore = defineStore('home', {
     state: ()=>{
@@ -16,8 +17,8 @@ export const useHomeStore = defineStore('home', {
                 const res = await fetch(url, {
                 method: 'GET',
                 headers: {
-                    'X-RapidAPI-Key': 'a4a3046c5dmsh5e782336d20aad0p11f6cajsnc58585bec798',
-                    'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
+                    'X-RapidAPI-Key': config.apikey,
+                    'X-RapidAPI-Host': config.apiHost
                 }
                 })
                 const response = await res.json()
@@ -33,8 +34,8 @@ export const useHomeStore = defineStore('home', {
                 const res = await fetch(url, {
                 method: 'GET',
                 headers: {
-                    'X-RapidAPI-Key': 'a4a3046c5dmsh5e782336d20aad0p11f6cajsnc58585bec798',
-                    'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
+                    'X-RapidAPI-Key': config.apikey,
+                    'X-RapidAPI-Host': config.apiHost
                 }
                 })
                 const response = await res.json()
