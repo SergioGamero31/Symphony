@@ -8,7 +8,7 @@
         <RouterView/>
       </main>
       <section class="bg-raisin-black">
-        <PlayBar/>
+        <PlayBar v-if="store.currentSong"/>
       </section>
     </div>
   </div>
@@ -18,10 +18,12 @@
   import { RouterLink, RouterView } from 'vue-router'
   import NavBar from './components/NavBar.vue';
   import PlayBar from './components/PlayBar.vue';
+  import { useSongStore } from './store/song';
+
+  const store = useSongStore()
 </script>
-
+  
 <style>
-
 .router-link-exact-active{
   color: #fff;
 }
