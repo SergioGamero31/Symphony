@@ -1,13 +1,13 @@
 <template>
   <div class="h-screen w-screen flex">
-    <header class="bg-raisin-black">
+    <header class="bg-night-darker">
       <NavBar/>
     </header>
     <div class="flex flex-col w-full justify-between">
-      <main class=" flex flex-col bg-jet px-14 h-full overflow-hidden">
+      <main class=" flex flex-col bg-night h-full overflow-hidden">
         <RouterView/>
       </main>
-      <section class="bg-raisin-black">
+      <section class="bg-night-darker">
         <PlayBar v-if="store.currentSong"/>
       </section>
     </div>

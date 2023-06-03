@@ -1,6 +1,6 @@
 <template>
     <ul class="flex flex-col gap-1 bg-raisin-black rounded-2xl text-white p-4 h-80 overflow-auto ">
-        <li @click="selectSong(item, store.search)" class="flex items-center justify-between p-2 rounded-md hover:bg-darker-raisin hover:cursor-pointer" v-for = "item in store.search" :key="item.id">
+        <li @click="selectSong(item, store.search)" class="flex items-center justify-between p-2 rounded-md hover:bg-night hover:cursor-pointer" v-for = "item in store.search" :key="item.id">
             <div class="flex items-center gap-4">
                 <img class="rounded w-10" :src="item.album.cover" :alt="`Portada de ${item.title}`" loading="lazy">
                 <div class="flex flex-col">

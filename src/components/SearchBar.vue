@@ -1,6 +1,6 @@
 <template>
-    <div class="bg-dim-gray rounded-xl flex px-5 my-9">
-        <input @keyup="handleSearch" class=" bg-transparent focus:outline-none text-white placeholder:text-white w-full py-2.5" type="text" placeholder="Buscar" v-model="searchItem" >
+    <div class="bg-raisin-black rounded-xl flex px-5 my-9 w-2/4">
+        <input @keyup="handleSearch" class=" bg-transparent focus:outline-none text-white placeholder:text-battleship-gray w-full py-2.5" type="text" placeholder="Buscar" v-model="searchItem" >
         <button @click="handleSearch" class="text-lg text-white"><SearchIcon/></button>
     </div>
 </template>

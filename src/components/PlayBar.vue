@@ -25,7 +25,7 @@
             <button @click="toggleMute" class="text-lg">
                 <component :is="store.isMuted ? MuteIcon : VolumeIcon"/>
             </button>
-            <input class="accent-white cursor-pointer w-28 h-1.5" type="range" v-model="volume">
+            <input class="accent-mslate-blue cursor-pointer w-28 h-1.5" type="range" v-model="volume">
         </div>
     </div>
 </template>

@@ -7,13 +7,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'jet': '#313139',
-        'raisin-black': '#1F1E26',
+        'night': '#141418',
+        'night-darker': '#0F0F11',
+        'raisin-black': '#232329',
         'mslate-blue': '#6A68D8',
         'battleship-gray': '#8D8D8D',
-        'dim-gray': '#64626F',
         'eerie-black': '#252525',
-        'darker-raisin': '#18171E'
       },
       keyframes: {
         slide : {
