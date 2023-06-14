@@ -1,9 +1,67 @@
 <template>
-    <h1>Artist</h1>
+    <div class="overflow-auto pb-8">
+        <div v-if="store.artist" :style="`background-image: url(${store.artist.picture_xl})`" class="flex h-96 text-white bg-cover">
+            <div class="flex w-full flex-col justify-between pl-14 py-8 backdrop-opacity-20 bg-raisin-black/50">
+                <button @click="goBack" class="text-lg rounded-full border border-transparent p-1 self-start hover:border-white transition-colors"><ArrowLeft/></button>
+                <div class="flex flex-col gap-5">
+                    <h1 class="text-4xl font-semibold">{{ store.artist.name }}</h1>
+                    <p>{{ formattedFollowers }} seguidores</p>
+                    <div class="flex gap-3 items-center">
+                        <button class="bg-mslate-blue rounded-lg py-1.5 px-5">Reproducir</button>
+                        <input class="hidden" id="heartCheckBox" type="checkbox" v-model="store.isFollow">
+                        <label class="text-2xl hover:cursor-pointer hover:text-crimson transition-colors" :class="{'text-crimson' : store.isFollow}" for="heartCheckBox">
+                            <component :is="store.isFollow ? HearIconFill : HeartIconLine" />
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="px-14 mt-9 text-white">
+            <h2 class="font-semibold text-xl mb-7">Populares</h2>
+            <section>
+                <SongList :songList="store.discography.slice(0, 5)" overflowValue="hidden"/>
+            </section>
+            <section v-if="store.albums.length > 0">
+                <h2 class="font-semibold text-xl mt-9 mb-7">Álbumes</h2>
+                <TrackList :albumList="store.albums"/>
+            </section>
+            <section v-if="store.singles.length > 0">
+                <h2 class="font-semibold text-xl mt-9 mb-7">Sencillos</h2>
+                <TrackList :albumList="store.singles"/>
+            </section>
+        </div>
+    </div>
 </template>
 
 <script setup>
-</script>
+    import { onMounted, computed } from 'vue';
+    import { useRoute, useRouter } from 'vue-router';
+    import SongList from '../components/SongList.vue'
+    import TrackList from '../components/TrackList.vue';
+    import ArrowLeft from '~icons/mingcute/arrow-left-line'
+    import HeartIconLine from '~icons/mingcute/heart-line'
+    import HearIconFill from '~icons/mingcute/heart-fill'
+    import { useArtistStore } from '../store/artist'
 
-<style scoped>
-</style>
+    const store = useArtistStore()
+    const route = useRoute()
+    const router = useRouter()
+
+    onMounted(() => {
+        const params = route.params
+        store.artist = {}
+        store.discography = []
+        store.albums = []
+        store.singles = []
+        store.fetchArtist(params.id)
+    })
+
+    const formattedFollowers = computed(()=>{
+        if(store.artist.nb_fan) {
+            return  parseFloat(store.artist.nb_fan).toLocaleString('en')
+        }
+    })     
+
+    const goBack = () => router.go(-1)
+   
+</script>

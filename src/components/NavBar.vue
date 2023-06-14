@@ -1,6 +1,6 @@
 <template>
     <nav class="h-full w-max flex flex-col justify-between items-center py-5 px-8">
-        <ul class="flex flex-col gap-6 text-battleship-gray">
+        <ul class="flex flex-col gap-6 text-battleship-gray mt-4">
             <li><RouterLink :to="{name: 'home'}" class="flex items-center gap-3"><HomeIcon/>Inicio</RouterLink></li>
             <li class="flex items-center gap-3"><CompassIcon/>Explorar</li>
             <li class="flex items-center gap-3"><PlaylistIcon/>Libreria</li>

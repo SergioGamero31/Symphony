@@ -13,6 +13,7 @@ module.exports = {
         'mslate-blue': '#6A68D8',
         'battleship-gray': '#8D8D8D',
         'eerie-black': '#252525',
+        'crimson': '#D6304E'
       },
       keyframes: {
         slide : {

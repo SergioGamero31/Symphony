@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
-import config from "../../config";
+import { useFetch } from "../composables/useFetch";
+const {fetchData, results, error} = useFetch()
 
 export const useSearchStore = defineStore('search', {
     state: ()=>{
@@ -12,55 +13,34 @@ export const useSearchStore = defineStore('search', {
     },
     actions: {
         async fetchSearch(term){
-            try{
-                const url = `https://deezerdevs-deezer.p.rapidapi.com/search?q=${term}`;
-                const res = await fetch(url, {
-                    method: 'GET',
-                    headers: {
-                        'X-RapidAPI-Key': config.apikey,
-                        'X-RapidAPI-Host': config.apiHost
-                    }
-                })
-                const response = await res.json()
-                this.search = response.data
-
+            const url = `https://deezerdevs-deezer.p.rapidapi.com/search?q=${term}`;
+            await fetchData(url)
+            if(error.value) console.log(error.value)
+            else{
+                this.search = results.value.data
                 const matchingArtist = this.search.find(result => result.artist.name.toLowerCase() === term.toLowerCase())
                 this.artist = matchingArtist ? matchingArtist.artist : {}
             }
-            catch(err){
-                console.log(err)
-            }
+        },
+        async fetchSongs(term, limit){
+            const url = `https://deezerdevs-deezer.p.rapidapi.com/search?q=${term}&limit=${limit}`
+            await fetchData(url)
+            if(error.value) console.log(error.value)
+            else return results.value.data
+        },
+        async fetchForYou(term){
+            const songs = await this.fetchSongs(term, 9);
+            if(error.value) console.log(error.value)
+            else this.recommended = songs
+        },
+        async fetchTopSongs(term){
+            const songs = await this.fetchSongs(term, 18);
+            if(error.value) console.log(error.value)
+            else this.top = songs
         },
         restoreContent(){
             this.search = []
             this.artist = {}
-        },
-
-        async fetchSongs(term, limit){
-            try{
-                const url = `https://deezerdevs-deezer.p.rapidapi.com/search?q=${term}&limit=${limit}`
-                const res = await fetch(url, {
-                    method: 'GET',
-                    headers: {
-                        'X-RapidAPI-Key': config.apikey,
-                        'X-RapidAPI-Host': config.apiHost
-                    }
-                })
-                const response = await res.json()
-                return response.data
-            }
-            catch(err){
-                console.log(err)
-                return []
-            }
-        },
-        async fetchForYou(term){
-            const songs = await this.fetchSongs(term, 9);
-            this.recommended = songs
-        },
-        async fetchTopSongs(term){
-            const songs = await this.fetchSongs(term, 18);
-            this.top = songs
         }
     }
 })
