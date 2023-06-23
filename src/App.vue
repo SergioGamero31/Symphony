@@ -1,11 +1,11 @@
 <template>
-  <div class="h-screen w-screen flex">
-    <header class="bg-night-darker">
-      <NavBar/>
+  <div class="flex h-screen overflow-hidden">
+    <header class="bg-night-darker max-md:absolute xs:h-screen">
+      <NavBar @showNav="toogleNavBar" :show="showNavBar"/>
     </header>
     <div class="flex flex-col w-full justify-between">
-      <main class="flex flex-col bg-night h-full overflow-hidden">
-        <RouterView/>
+      <main class="flex flex-col h-screen bg-night overflow-hidden">
+        <RouterView @showNav="toogleNavBar"/>
       </main>
       <section class="bg-night-darker">
         <PlayBar v-if="store.currentSong"/>
@@ -15,12 +15,19 @@
 </template>
 
 <script setup>
-  import { RouterLink, RouterView } from 'vue-router'
+  import { ref } from 'vue'
+  import { RouterView } from 'vue-router'
   import NavBar from './components/NavBar.vue';
   import PlayBar from './components/PlayBar.vue';
   import { useSongStore } from './store/song';
 
+  let showNavBar = ref(false)
+
   const store = useSongStore()
+  const toogleNavBar = () =>{
+    showNavBar.value = !showNavBar.value
+  } 
+
 </script>
   
 <style>

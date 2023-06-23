@@ -1,15 +1,15 @@
 <template>
     <div class="bg-white h-0.5" :style="{ width: progress + '%' }"></div>
     <div class="flex text-white items-center p-3 justify-between">
-        <div class="flex items-center gap-5 w-1/3">
-            <img class="rounded w-16 z-10" :src="store.currentSong.album.cover_medium">
-            <div>
-                <h3>{{ store.currentSong.title }}</h3>
-                <p class="text-battleship-gray">{{ store.currentSong.artist.name}}</p>
+        <div class="flex items-center gap-5 xs:w-3/5 md:w-1/3 ">
+            <img class="rounded xs:w-10 md:w-16" :src="store.currentSong.album.cover_medium">
+            <div class="overflow-hidden xs:whitespace-nowrap md:whitespace-normal">
+                <h3 class="truncate">{{ store.currentSong.title }}</h3>
+                <p class="text-battleship-gray xs:text-sm md:text-base">{{ store.currentSong.artist.name}}</p>
             </div>
         </div>
         <div class="flex gap-6 items-center">
-            <button @click="toggleRepeat" class="text-lg" :class="{ 'text-mslate-blue': store.isRepeat, 'text-white': !store.isRepeat }">
+            <button @click="toggleRepeat" class="text-lg xs:hidden md:block" :class="{ 'text-mslate-blue': store.isRepeat, 'text-white': !store.isRepeat }">
                 <RepeatIcon/>
             </button>
             <div class="flex gap-4 items-center">
@@ -19,9 +19,9 @@
                 </button>
                 <button @click="nextSong" class="text-xl"><SkipIcon/></button>
             </div>
-            <button class="text-lg"><ShuffleIcon/></button>
+            <button class="text-lg xs:hidden md:block"><ShuffleIcon/></button>
         </div>
-        <div class="flex gap-2 items-center w-1/3 justify-end">
+        <div class="xs:hidden md:flex gap-2 items-center w-1/3 justify-end">
             <button @click="toggleMute" class="text-lg">
                 <component :is="store.isMuted ? MuteIcon : VolumeIcon"/>
             </button>
