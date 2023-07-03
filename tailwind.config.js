@@ -11,6 +11,7 @@ module.exports = {
         'night-darker': '#0F0F11',
         'raisin-black': '#232329',
         'mslate-blue': '#6A68D8',
+        'slate-blue': '#7270E4',
         'battleship-gray': '#8D8D8D',
         'eerie-black': '#252525',
         'crimson': '#D6304E'
@@ -25,6 +26,13 @@ module.exports = {
         'slide-left': 'slide 2s linear infinite'
       }
     },
+    screens :{
+      'xs': '320px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+    }
   },
   plugins: [],
 }

@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-    import { onMounted, computed, watch } from 'vue';
+    import { onMounted, computed } from 'vue';
     import { useRouter } from 'vue-router';
     import SongList from '../components/SongList.vue'
     import TrackList from '../components/TrackList.vue';
@@ -45,15 +45,11 @@
 
     const store = useArtistStore()
     const router = useRouter()
+    const artistId = router.currentRoute.value.params.id
 
     onMounted(() => {
-        const params = router.currentRoute.value.params
-        store.artist = {}
-        store.discography = []
-        store.albums = []
-        store.singles = []
-        store.fetchArtist(params.id)
-        
+        store.restoreContent()
+        store.fetchArtist(artistId)
     })
 
     const goBack = () => router.go(-1)

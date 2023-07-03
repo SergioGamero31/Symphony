@@ -22,8 +22,7 @@
     const store = useSongStore()
 
     const props = defineProps({
-        songList: ref(Array),
-        overflowValue: String
+        songList: ref(Array)
     })
 
     const getFormattedDuration = (duration) => { 

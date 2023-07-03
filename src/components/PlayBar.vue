@@ -13,11 +13,11 @@
                 <RepeatIcon/>
             </button>
             <div class="flex gap-4 items-center">
-                <button @click="previousSong" class="text-xl rotate-180"><SkipIcon/></button>
-                <button @click="togglePlay" class="text-4xl">
+                <button @click="previousSong" class="text-xl rotate-180 active:scale-90 transition-transform"><SkipIcon/></button>
+                <button @click="togglePlay" class="text-4xl xs:active:scale-90 lg:active:scale-75 transition-transform">
                     <component :is="store.isPlaying ? PauseIcon : PlayIcon" />
                 </button>
-                <button @click="nextSong" class="text-xl"><SkipIcon/></button>
+                <button @click="nextSong" class="text-xl active:scale-90 transition-transform"><SkipIcon/></button>
             </div>
             <button class="text-lg xs:hidden md:block"><ShuffleIcon/></button>
         </div>

@@ -9,7 +9,8 @@ export const useArtistStore = defineStore('artist', {
             discography: [],
             albums: [],
             singles: [],
-            isFollow: false
+            isFollow: false,
+            cache: {}
         }
     },
     actions : {
@@ -33,6 +34,7 @@ export const useArtistStore = defineStore('artist', {
             if(error.value) console.log(error.value)
             else{
                 this.discography = results.value.data
+                console.log(this.discography)
                 this.getAlbumDetail()
             }
         },
@@ -64,7 +66,9 @@ export const useArtistStore = defineStore('artist', {
         },
         restoreContent(){
             this.artist = {}
+            this.discography = []
             this.albums = []
+            this.singles = []
         }
     }
 })

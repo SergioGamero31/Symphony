@@ -10,12 +10,12 @@
             </RouterLink>
         </li>
     </ul>
-    <ul v-else-if="albumList" class="grid xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-9 gap-4 w-fit">
-        <li class="flex flex-col gap-2 overflow-hidden hover:cursor-pointer" v-for="album in albumList" :key="album.id">
+    <div v-else-if="albumList" class="grid xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-9 gap-4 w-fit">
+        <RouterLink :to="{name: 'album' , params:{ id: album.id}}" class="flex flex-col gap-2 overflow-hidden hover:scale-105 transition-transform" v-for="album in albumList" :key="album.id">
             <img class="rounded-lg" :src="album.cover_medium" :alt="`Portada para la canción ${album.title} de ${album.artist.name}`">
-            <h4 class="text-white text-base truncate">{{ album.title }}</h4>
-        </li>
-    </ul>
+            <h4  class="text-white text-base truncate">{{ album.title }}</h4>
+        </RouterLink>
+    </div>
 </template>
 
 <script setup>
