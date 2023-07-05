@@ -18,6 +18,13 @@ export const useArtistStore = defineStore('artist', {
             this.isFollow = !this.isFollow
         },
         async fetchArtist(id){
+            if(this.cache[id]){
+                this.artist = this.cache[id].artist
+                this.discography = this.cache[id].discography
+                this.albums = this.cache[id].albums
+                this.singles = this.cache[id].singles
+                return
+            }
             const url = `https://deezerdevs-deezer.p.rapidapi.com/artist/${id}`;
             await fetchData(url)
             if(error.value) console.log(error.value)
@@ -26,15 +33,20 @@ export const useArtistStore = defineStore('artist', {
                 if(results.value.name) {
                     await this.fetchDiscography(results.value.name)
                 }
+                this.cache[id] = {
+                    artist: this.artist,
+                    discography: this.discography,
+                    albums: this.albums,
+                    singles: this.singles
+                  };
             }
         },
         async fetchDiscography(term){
-            const url = `https://deezerdevs-deezer.p.rapidapi.com/search?q=artist:"${term}"`;
+            const url = `https://deezerdevs-deezer.p.rapidapi.com/search?q=${term}`;
             await fetchData(url)
             if(error.value) console.log(error.value)
             else{
                 this.discography = results.value.data
-                console.log(this.discography)
                 this.getAlbumDetail()
             }
         },
@@ -49,13 +61,18 @@ export const useArtistStore = defineStore('artist', {
             Promise.all(albums)
             .then(response => {
                 response.forEach(album =>{
-                    const albumExists = this.albums.find(a => a.id === album.id);
-                    const singleExists = this.singles.find(s => s.id === album.id);
+                    const albumExists = this.albums.find(a => a.id === album.id)
+                    const singleExists = this.singles.find(s => s.id === album.id)
+                    let isContributor = false
 
-                    if(album.record_type === 'album' || album.record_type === 'ep'){
+                    album.contributors.forEach(contributor => {
+                        if(contributor.name === this.artist.name) isContributor = true
+                    })
+
+                    if((album.record_type === 'album' || album.record_type === 'ep') && isContributor){
                         !albumExists && this.albums.push(album)
                     }
-                    else if(album.record_type === 'single') {
+                    else if(album.record_type === 'single' && isContributor) {
                         !singleExists && this.singles.push(album)
                     }
                 })
