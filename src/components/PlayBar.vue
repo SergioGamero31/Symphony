@@ -5,7 +5,7 @@
             <img class="rounded xs:w-10 md:w-16" :src="store.currentSong.album.cover_medium">
             <div class="overflow-hidden xs:whitespace-nowrap md:whitespace-normal">
                 <h3 class="truncate">{{ store.currentSong.title }}</h3>
-                <p class="text-battleship-gray xs:text-sm md:text-base">{{ store.currentSong.artist.name}}</p>
+                <p class="text-battleship-gray xs:text-sm md:text-base">{{ store.currentSong.artist.name }}</p>
             </div>
         </div>
         <div class="flex gap-6 items-center">
@@ -56,36 +56,27 @@
     }, { inmediate: true })
 
     watch(shouldStopPlaying, (shouldStop)=>{
-        if(shouldStop) store.togglePlay()
+        if (shouldStop) nextSong()
     })
 
     const toggleRepeat = () => store.toggleRepeat()
 
     const previousSong = () => {
         const currentIndex = store.songs.findIndex(song => song === store.currentSong)
-        const previousIndex = currentIndex - 1
-        const lastIndex = store.songs.length -1
-
-        if(previousIndex >= 0){
-            const previousSong = store.songs[previousIndex]
-            store.setCurrentSong(previousSong)
-        }
-        else {
-            const previousSong = store.songs[lastIndex]
-            store.setCurrentSong(previousSong)
-        }
+        const previousIndex = (currentIndex - 1 + store.songs.length) % store.songs.length
+        const previousSong = store.songs[previousIndex]
+        store.setCurrentSong(previousSong)
     }
+
     const nextSong = () => {
         const currentIndex = store.songs.findIndex(song => song === store.currentSong)
-        const nextIndex = currentIndex + 1
-
-        if(nextIndex < store.songs.length){
-            const nextSong = store.songs[nextIndex]
-            store.setCurrentSong(nextSong)
-        }
-        else{
-            const nextSong = store.songs[0]
-            store.setCurrentSong(nextSong)
+        const lastIndex = store.songs.length - 1;
+        const nextIndex = currentIndex === lastIndex ? 0 : currentIndex + 1;
+       
+        if (currentIndex === lastIndex && !store.isRepeat) store.togglePlay();
+        else {
+            const nextSong = store.songs[nextIndex];
+            store.setCurrentSong(nextSong);
         }
     }
 
