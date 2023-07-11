@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-    import { ref, watchEffect, watch, computed} from 'vue'
+    import { ref, watchEffect, watch, computed } from 'vue'
     import { useSongStore } from '../store/song'
     import PlayIcon from '~icons/mingcute/play-fill'
     import PauseIcon from '~icons/mingcute/pause-fill'
@@ -56,7 +56,7 @@
     }, { inmediate: true })
 
     watch(shouldStopPlaying, (shouldStop)=>{
-        if (shouldStop) nextSong()
+        if (shouldStop) autoChangeSong()
     })
 
     const toggleRepeat = () => store.toggleRepeat()
@@ -69,6 +69,14 @@
     }
 
     const nextSong = () => {
+        const currentIndex = store.songs.findIndex(song => song === store.currentSong)
+        const lastIndex = store.songs.length - 1;
+        const nextIndex = currentIndex === lastIndex ? 0 : currentIndex + 1;
+        const nextSong = store.songs[nextIndex]
+        store.setCurrentSong(nextSong)
+    }
+
+    const autoChangeSong = () => {
         const currentIndex = store.songs.findIndex(song => song === store.currentSong)
         const lastIndex = store.songs.length - 1;
         const nextIndex = currentIndex === lastIndex ? 0 : currentIndex + 1;
