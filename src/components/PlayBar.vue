@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-    import { ref, watchEffect, watch, computed } from 'vue'
+    import { ref, watchEffect, watch, computed, onBeforeUnmount } from 'vue'
     import { useSongStore } from '../store/song'
     import PlayIcon from '~icons/mingcute/play-fill'
     import PauseIcon from '~icons/mingcute/pause-fill'
@@ -48,7 +48,7 @@
     const shouldStopPlaying = computed(()=> progress.value >= 100)
 
     watchEffect(()=>{
-        if(store.currentSong.preview) store.audio.play()    
+        if(store.currentSong.preview) store.audio.play()
     })
 
     watch(volume, (newVolume)=>{
@@ -105,4 +105,9 @@
         requestAnimationFrame(updateProgress)
     }   
     requestAnimationFrame(updateProgress)
+
+    onBeforeUnmount(()=>{
+       store.audio.pause()
+       store.currentSong = null
+    })
 </script>
