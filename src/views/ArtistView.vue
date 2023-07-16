@@ -7,7 +7,7 @@
                     <h1 class="text-4xl font-semibold">{{ store.artist.name }}</h1>
                     <p>{{ formattedFollowers }} seguidores</p>
                     <div class="flex gap-3 items-center">
-                        <button class="bg-mslate-blue rounded-lg py-1.5 px-5 hover:bg-slate-blue transition-colors">Reproducir</button>
+                        <button @click="playSong(store.discography[0], store.discography.slice(0, 5))" class="rounded-lg py-1.5 px-5 bg-mslate-blue hover:bg-slate-blue active:text-raisin-black transition-colors">Reproducir</button>
                         <input class="hidden" id="heartCheckBox" type="checkbox" v-model="store.isFollow">
                         <label class="text-2xl hover:cursor-pointer hover:text-crimson transition-colors" :class="{'text-crimson' : store.isFollow}" for="heartCheckBox">
                             <component :is="store.isFollow ? HearIconFill : HeartIconLine" />
@@ -42,8 +42,11 @@
     import HeartIconLine from '~icons/mingcute/heart-line'
     import HearIconFill from '~icons/mingcute/heart-fill'
     import { useArtistStore } from '../store/artist'
-
+    import { useSongStore } from '../store/song';
+    
     const store = useArtistStore()
+    const songStore = useSongStore()
+
     const router = useRouter()
     const artistId = router.currentRoute.value.params.id
 
@@ -64,5 +67,10 @@
         if(store.artist.nb_fan) {
             return  parseFloat(store.artist.nb_fan).toLocaleString('en')
         }
-    })     
+    })
+    
+    const playSong = (song, songList) =>{
+        songStore.setCurrentSong(song)
+        songStore.setSongList(songList)
+    }
 </script>
