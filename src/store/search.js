@@ -5,6 +5,8 @@ const {fetchData, results, error} = useFetch()
 export const useSearchStore = defineStore('search', {
     state: ()=>{
         return {
+            searchTerm: '',
+            isSearched: false,
             artist : {},
             search: [],
             recommended: [],
@@ -39,6 +41,7 @@ export const useSearchStore = defineStore('search', {
             else this.top = songs
         },
         restoreContent(){
+            this.isSearched = false
             this.search = []
             this.artist = {}
         }

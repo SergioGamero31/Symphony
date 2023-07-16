@@ -8,7 +8,7 @@
         <RouterView @showNav="toogleNavBar"/>
       </main>
       <section class="bg-night-darker">
-        <PlayBar v-if="store.currentSong"/>
+        <PlayBar v-if="store.currentSong && !isNotFound"/>
       </section>
     </div>
   </div>
