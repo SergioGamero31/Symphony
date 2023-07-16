@@ -1,5 +1,7 @@
 import { ref, readonly } from "vue";
-import config from "../../config";
+
+const apiUrl = import.meta.env.VITE_API_URL;
+const apiKey = import.meta.env.VITE_API_KEY;
 
 export function useFetch(){
     const results = ref(null)
@@ -10,8 +12,8 @@ export function useFetch(){
             const res = await fetch(url, {
                 method: 'GET',
                 headers: {
-                    'X-RapidAPI-Key': config.apikey,
-                    'X-RapidAPI-Host': config.apiHost
+                    'X-RapidAPI-Key': apiKey,
+                    'X-RapidAPI-Host': apiUrl
                 }
             })
             const response = await res.json();
