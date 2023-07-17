@@ -1,14 +1,10 @@
 # Symphony
 
-This template should help get you started developing with Vue 3 in Vite.
 
-## Recommended IDE Setup
+![Symphony](https://github.com/SergioGamero31/Symphony/assets/64720452/3ff2feac-c5ca-4aa0-9b44-df70e0af322b)
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+Symphony is a music player that allows you to enjoy your favorite songs and artists anytime, anywhere.
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ## Project Setup
 
@@ -16,20 +12,23 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+#### Compile and Hot-Reload for Development
 
 ```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
+#### Lint with [ESLint](https://eslint.org/)
 
 ```sh
 npm run lint
 ```
+
+## Build with
++ [Vue](https://vuejs.org/)
++ [Vite](https://vitejs.dev/)
++ [Tailwind CSS](https://tailwindcss.com/)
++ [RapidApi](https://rapidapi.com/hub)
+
+## Demo
+[Demo](https://symphony-nine.vercel.app/)
