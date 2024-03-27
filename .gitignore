@@ -21,6 +21,7 @@ coverage
 .vscode/
 .env
 .idea
+.prettierrc
 config.js
 *.suo
 *.ntvs*
